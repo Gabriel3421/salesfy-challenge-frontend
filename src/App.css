@@ -1,19 +1,24 @@
-:root {
-  --primary-color: #612F74;
-  --title-color: #122153;
-  --text-color: #4C6C80;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+#root {
+  background: none;
+}
+
 body {
-  background: #F0F0F5;
+  background: linear-gradient(rgb(74, 36, 88), #ab59c1) no-repeat;
+  background-color: #ab59c1;
   -webkit-font-smoothing: antialiased;
-  color: var(--text-color);
 }
 
 body, input, button {
@@ -21,6 +26,13 @@ body, input, button {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--title-color);
   font-family: Ubuntu;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
 }
