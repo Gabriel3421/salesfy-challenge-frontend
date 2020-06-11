@@ -1,8 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent, useMemo } from 'react';
-import { FiWind } from 'react-icons/fi';
-import { Container, Form, SubmitButton, TextButton,TextAmount, List } from './styles';
-import api from '../../services/api'
-
+import { Container, Image, Form, SubmitButton, TextButton,TextAmount, List } from './styles';
+import api from '../../services/api';
+import logo from '../../assets/logo_desafio.svg';
 interface Translate {
   translated: string;
 }
@@ -54,10 +53,7 @@ const Translate: React.FC = () => {
 
   return (
     <Container>
-        <h1>
-          <FiWind />
-          Number to Words
-        </h1>
+        <Image src={logo} alt="logo"/>
         <Form onSubmit={handlesubmit}>
           <input
             type="number"
