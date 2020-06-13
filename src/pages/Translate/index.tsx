@@ -1,54 +1,57 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent, useMemo } from 'react';
-import { Container, Image, Form, SubmitButton, TextButton,TextAmount, List } from './styles';
+import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
+import { 
+  Container,
+  Image,
+  Form,
+  SubmitButton,
+  TextButton,TextAmount,
+  ScrollView,
+  List,
+  TextNumber 
+} from './styles';
 import api from '../../services/api';
 import logo from '../../assets/logo_desafio.svg';
+
 interface Translate {
   translated: string;
 }
 
 const Translate: React.FC = () => {
+  const [amountTranslated, setAmountTranslated] = useState('zero');
   const [stringifyNumbers, setStringifyNumbers] = useState<String[]>([]);
   const [newNumber, setNewNumber] = useState('');
-  const [amountTranslated, setAmountTranslated] = useState('zero');
-  const [amountStyle, setAmountStyle] = useState<number>(-1);
-
-  const amount = useMemo(()=>{
-    return stringifyNumbers.length
-  },[stringifyNumbers]);
+  
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, []);
 
   useEffect(() => {
     async function handleTranslateAmount(){
-      await api.get<Translate>(`/?translate=${String(amount)}`).then(res => {
+      await api.get<Translate>(`/?translate=${String(stringifyNumbers.length)}`).then(res => {
         setAmountTranslated(res.data.translated);
       })
     }
     handleTranslateAmount();
-  }, [amount]);
-
-  useEffect(() => {
-    stringifyNumbers.map((item, index) => {
-      if (item === (amountTranslated)){
-        console.log(amountTranslated)
-        console.log(item)
-        setAmountStyle(index)
-        return item
-      }
-      return item
-    })
-    
-  }, [amountTranslated, stringifyNumbers]);
+  }, [stringifyNumbers]);
 
   function handleInputChange (event: ChangeEvent<HTMLInputElement>){
     setNewNumber(event.target.value);
   }
+
   async function handlesubmit (event: FormEvent){
     event.preventDefault();
-    await api.get<Translate>(`/?translate=${String(newNumber)}`).then(res => {
-      setAmountStyle(-1)
-      setStringifyNumbers([...stringifyNumbers, res.data.translated]);
-    })
-    console.log(amountStyle)
-    // setNewNumbers('');
+    window.scroll({
+      top: 400,
+      left: 0,
+      behavior: 'smooth'
+    });
+    await api.get<Translate>(`/?translate=${String(newNumber)}`).then(async res => {
+    await setStringifyNumbers([...stringifyNumbers, res.data.translated]);
+    });
   }
 
   return (
@@ -56,12 +59,14 @@ const Translate: React.FC = () => {
         <Image src={logo} alt="logo"/>
         <Form onSubmit={handlesubmit}>
           <input
+            id="input"
             type="number"
             placeholder="Enter with a number"
             value={newNumber}
             onChange={handleInputChange}
+            required
           />
-          <SubmitButton >
+          <SubmitButton>
             <TextButton>Translate</TextButton>
           </SubmitButton>
         </Form>
@@ -70,25 +75,16 @@ const Translate: React.FC = () => {
           There’s {amountTranslated.toLowerCase() || 'zero'} numbers translated
         </TextAmount>
 
-        <List>
-            {stringifyNumbers.map((number, index) => {
-              let color = '';
-              
-              if (index === amountStyle){
-                color = '#7159c1'
-              }
-              if ( amountStyle === -1 ){
-                color = ''
-              }
-              return (
+        <ScrollView visible={stringifyNumbers.length > 7 ? true : false}>
+          <List>
+              {stringifyNumbers.map((item, index) => (
                 <li key={index}>
-                  <span style={{color: color}}>{number}</span>
+                  <TextNumber colored={(item === amountTranslated)}>{item}</TextNumber>
                 </li>
-              )
-            })}
-        </List>
+              ))}
+          </List>
+        </ScrollView>
       </Container>
-  
   );
 }
 
