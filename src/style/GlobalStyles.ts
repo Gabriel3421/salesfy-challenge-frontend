@@ -13,6 +13,9 @@ const GlobalStyle = createGlobalStyle`
 
   html, body, #root {
     height: 100%;
+    &::-webkit-scrollbar{
+    display: none;
+  }
   }
   #root {
     background: none;

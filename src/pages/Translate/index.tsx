@@ -57,7 +57,7 @@ const Translate: React.FC = () => {
   return (
     <Container>
         <Image src={logo} alt="logo"/>
-        <Form onSubmit={handlesubmit}>
+        <Form onSubmit={handlesubmit} >
           <input
             id="input"
             type="number"
@@ -79,7 +79,7 @@ const Translate: React.FC = () => {
           <List>
               {stringifyNumbers.map((item, index) => (
                 <li key={index}>
-                  <TextNumber colored={(item === amountTranslated)}>{item}</TextNumber>
+                  <TextNumber styled={(item === amountTranslated)}>{item}</TextNumber>
                 </li>
               ))}
           </List>

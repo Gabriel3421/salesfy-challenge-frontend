@@ -5,7 +5,7 @@ interface Scroll {
 }
 
 interface StyledNumbers{
-  readonly colored: Boolean;
+  readonly styled: Boolean;
 }
 
 export const Container = styled.div`
@@ -14,6 +14,7 @@ export const Container = styled.div`
   border-radius: 8px;
   padding: 50px;
   margin: 0 auto;
+  
 `;
 
 export const Image = styled.img`
@@ -85,7 +86,7 @@ export const TextButton = styled.h2`
 `;
 
 export const TextAmount = styled.h2`
-  color: rgba(0,0,0,0.8);
+  color: #fff;
   font-size: 16px;
   margin-top: 15px;
 `;
@@ -132,5 +133,8 @@ export const List = styled.ul`
 `;
 
 export const TextNumber = styled.span<StyledNumbers>`
-  color: ${props => props.colored ? 'red' : 'rgba(0,0,0,0.8)'}
-`;
+  color: ${props => props.styled ? '#cf191f' : 'rgba(0,0,0,0.8)'};
+  font-weight: bold;
+  font-style: ${props => props.styled ? 'italic' : 'normal'};
+`
+  
