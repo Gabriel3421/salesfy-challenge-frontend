@@ -9,6 +9,9 @@ import {
   List,
   TextNumber 
 } from './styles';
+import { useDispatch, useSelector } from 'react-redux'
+import { ApplicationState } from '../../store'
+import { addNumberTranslatedReq } from '../../store/ducks/numberToWords/actions'
 import api from '../../services/api';
 import logo from '../../assets/logo_desafio.svg';
 
@@ -17,8 +20,9 @@ interface Translate {
 }
 
 const Translate: React.FC = () => {
-  const [amountTranslated, setAmountTranslated] = useState('zero');
-  const [stringifyNumbers, setStringifyNumbers] = useState<String[]>([]);
+  const dispatch = useDispatch();
+  const stringifyNumbers = useSelector(( { numberToWords }: ApplicationState) => numberToWords.data)
+  const[amountTranslated, setAmountTranslated] = useState('');
   const [newNumber, setNewNumber] = useState('');
   
   useEffect(() => {
@@ -44,14 +48,7 @@ const Translate: React.FC = () => {
 
   async function handlesubmit (event: FormEvent){
     event.preventDefault();
-    window.scroll({
-      top: 400,
-      left: 0,
-      behavior: 'smooth'
-    });
-    await api.get<Translate>(`/?translate=${String(newNumber)}`).then(async res => {
-    await setStringifyNumbers([...stringifyNumbers, res.data.translated]);
-    });
+    dispatch(addNumberTranslatedReq(Number(newNumber)))
   }
 
   return (
@@ -61,8 +58,9 @@ const Translate: React.FC = () => {
           <input
             id="input"
             type="number"
-            placeholder="Enter with a number"
+            placeholder="Enter with a NUMBER"
             value={newNumber}
+            autoComplete='off'
             onChange={handleInputChange}
             required
           />
@@ -74,12 +72,12 @@ const Translate: React.FC = () => {
         <TextAmount>
           There’s {amountTranslated.toLowerCase() || 'zero'} numbers translated
         </TextAmount>
-
+        
         <ScrollView visible={stringifyNumbers.length > 7 ? true : false}>
           <List>
               {stringifyNumbers.map((item, index) => (
                 <li key={index}>
-                  <TextNumber styled={(item === amountTranslated)}>{item}</TextNumber>
+                  <TextNumber styled={item.translated === amountTranslated}>{item.translated}</TextNumber>
                 </li>
               ))}
           </List>
