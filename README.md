@@ -24,6 +24,19 @@ yarn start ou npm start
 OBS:
 Para o funcionamento correto rode primeiro o [back-end](https://github.com/Gabriel3421/SalesfyChallengeBackend) depois tente inserir os numero no campo de input.
 
+## Exemplo de uso
+
+  Após ter iniciado o servidor com o [back-end](https://github.com/Gabriel3421/SalesfyChallengeBackend) e iniciado este projeto, faça da seguinte forma :
+
+![Exemplo](https://drive.google.com/file/d/1VMjlv2Jk3PnyqCNdLe5zo4pIpyfLfuaK/view?usp=sharing)
+
+
+
+## Decisões/Detalhes de implementação
+
+* Por motivos de maior facilidade de implementação, quando os números são recebidos eles sao quebrados de 3 em 3 para a classificação por unidade, dezena e centenas; após essa classificação ele passa pela classificação de unidades de milhar, milhões e etc.
+
+* Por escolha minha o maior número possível foi de 999 nonilhões, pois considerei que abrangeria a maioria dos casos em que os usuários poderiam ter interesse.
 
 ## Construido com
 
