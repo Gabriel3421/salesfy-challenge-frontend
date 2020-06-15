@@ -28,7 +28,7 @@ Para o funcionamento correto rode primeiro o [back-end](https://github.com/Gabri
 
   Após ter iniciado o servidor com o [back-end](https://github.com/Gabriel3421/SalesfyChallengeBackend) e iniciado este projeto, faça da seguinte forma :
 
-![Exemplo](https://i.ibb.co/27H9Yvk/ezgif-com-crop.gif)
+![Exemplo](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
 
 
