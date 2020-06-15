@@ -30,18 +30,21 @@ Para o funcionamento correto rode primeiro o [back-end](https://github.com/Gabri
 
 ![Exemplo](https://github.com/Gabriel3421/salesfy-challenge-frontend/blob/master/src/assets/exemplo.gif)
 
-
-
 ## Decisões/Detalhes de implementação
 
-* Por motivos de maior facilidade de implementação, quando os números são recebidos eles sao quebrados de 3 em 3 para a classificação por unidade, dezena e centenas; após essa classificação ele passa pela classificação de unidades de milhar, milhões e etc.
+* Foi utilizado Redux, para guardar o state globalmente, como é uma programa "pequeno", salvei somente o historico de traduções, e as informações a partir dele, como a quantidade de elementos eu guardo no proprio state do componente, pois juguei que nao teria necessidade de armazenar no state global.
 
-* Por escolha minha o maior número possível foi de 999 nonilhões, pois considerei que abrangeria a maioria dos casos em que os usuários poderiam ter interesse.
+* Também foi adicionado a parte de Saga (Redux + Saga) para fazer requisições a api de tradução.
+
+* Styled-components para a estilização mais precisa e facilitada dos componentes.
 
 ## Construido com
 
 * [ReactJS](https://reactjs.org/docs/getting-started.html) - framework utilizado
 * [Typescript](https://www.typescriptlang.org/docs/home.html) - "Linguagem"
+* [Redux](https://redux.js.org/) - Biblioteca
+* [Redux-Saga](https://redux-saga.js.org/) - Biblioteca
+* [Styled-Components](https://styled-components.com/docs/api) - Biblioteca
 
 ## Authors
 
